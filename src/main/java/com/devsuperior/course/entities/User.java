@@ -1,11 +1,19 @@
 package com.devsuperior.course.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+
+@Entity//mapear para o JPA
+@Table(name = "tb_user")//especifirar o nome da tabela
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    //informar a chave primaria do banco de dados
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//anotação de auto-increment
     private Long id;
     private String name;
     private String email;
