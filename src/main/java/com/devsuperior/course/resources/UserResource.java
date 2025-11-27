@@ -34,5 +34,5 @@ public class UserResource {
         User obj = service.findById(id);//repassando o id que chegou na requisição
         return ResponseEntity.ok().body(obj);
     }
-    
+
 }

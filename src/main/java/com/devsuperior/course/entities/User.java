@@ -3,6 +3,8 @@ package com.devsuperior.course.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -11,14 +13,16 @@ import java.util.Objects;
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    //informar a chave primaria do banco de dados
-    @Id
+    @Id//informar a chave primaria do banco de dados
     @GeneratedValue(strategy = GenerationType.IDENTITY)//anotação de auto-increment
     private Long id;
     private String name;
     private String email;
     private String phone;
     private String password;
+
+    @OneToMany(mappedBy = "client")//um para muitos
+    private List<Order> orders = new ArrayList<>();//associação com Order
 
     //construtor vazio
     public User() {
@@ -72,6 +76,10 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     //hashCode & equals
