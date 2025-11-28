@@ -1,5 +1,7 @@
 package com.devsuperior.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,6 +16,9 @@ public class Order implements Serializable {
     @Id//informar a chave primaria do banco de dados
     @GeneratedValue(strategy = GenerationType.IDENTITY)//anotação de auto-increment
     private Long id;
+
+    //mostrar a data no formato ISO 8601
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
     @ManyToOne//muitos para um

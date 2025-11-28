@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Component //registra como um componente do spring e pode ser injetado no UserResource com autowired
-@Service //registra como serviço
+@Component//registra como um componente do spring e pode ser injetado no UserResource com autowired
+@Service//registra como serviço
 public class UserService {
     //declarando dependencia do repository
     @Autowired//injeção de dependencia

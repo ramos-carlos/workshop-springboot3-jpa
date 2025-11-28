@@ -1,5 +1,6 @@
 package com.devsuperior.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -21,6 +22,8 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+
+    @JsonIgnore//essa anotação evita o loop gerado no json
     @OneToMany(mappedBy = "client")//um para muitos
     private List<Order> orders = new ArrayList<>();//associação com Order
 
