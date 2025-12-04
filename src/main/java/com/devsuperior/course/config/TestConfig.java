@@ -1,8 +1,10 @@
 package com.devsuperior.course.config;
 
+import com.devsuperior.course.entities.Category;
 import com.devsuperior.course.entities.Order;
 import com.devsuperior.course.entities.User;
 import com.devsuperior.course.entities.enums.OrderStatus;
+import com.devsuperior.course.repositories.CategoryRepository;
 import com.devsuperior.course.repositories.OrderRepository;
 import com.devsuperior.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +26,21 @@ public class TestConfig implements CommandLineRunner {//CommandLineRunner execut
     private UserRepository userRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+
 
     @Override
     public void run(String... args) throws Exception {
         //tudo dentro desse metodo vai ser executado quando a aplicação for iniciada
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));//passa uma lista de objetos e ele salva no banco de dados
+
         User u1 = new User(null, "Carlos", "carlos@gmail.com", "98888888", "123456");
         User u2 = new User(null, "Erica", "erica@gmail.com", "97777777", "123456");
 
@@ -39,6 +52,5 @@ public class TestConfig implements CommandLineRunner {//CommandLineRunner execut
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));//passa uma lista de objetos e ele salva no banco de dados
 
     }
-
 
 }
