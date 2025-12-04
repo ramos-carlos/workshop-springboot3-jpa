@@ -1,9 +1,5 @@
 package com.devsuperior.course.resources;
 
-
-//controlador rest
-
-
 import com.devsuperior.course.entities.Order;
 import com.devsuperior.course.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
-@RestController//recurso web e implementado por um controlador Rest
+//controlador rest
+//recurso web e implementado por um controlador Rest
+@RestController
 @RequestMapping(value = "/orders")//caminho para o recurso
 public class OrderResource {
 
     @Autowired
-    private OrderService service;//dependencia para o service
+    private OrderService service;//dependência para o service
 
-    //endpoint para acessar os usuarios
+    //endpoint para acessar os usuários
     @GetMapping//metodo para responder tipo GET do http
     public ResponseEntity<List<Order>> findAll() {//reponsavel para retornar respostas de requisições web
         List<Order> list = service.findAll();

@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
-@Entity//mapear para o JPA
-@Table(name = "tb_user")//especifirar o nome da tabela
+//mapear para o JPA
+@Entity
+@Table(name = "tb_user")//especificar o nome da tabela
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id//informar a chave primaria do banco de dados
+    //informar a chave primaria do banco de dados
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//anotação de auto-increment
     private Long id;
     private String name;
@@ -22,9 +23,10 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-
-    @JsonIgnore//essa anotação evita o loop gerado no json
-    @OneToMany(mappedBy = "client")//um para muitos
+    //essa anotação evita o loop gerado no json
+    @JsonIgnore
+    //um para muitos
+    @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();//associação com Order
 
     //construtor vazio

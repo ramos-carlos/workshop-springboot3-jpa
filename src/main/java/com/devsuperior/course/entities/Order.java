@@ -1,5 +1,6 @@
 package com.devsuperior.course.entities;
 
+import com.devsuperior.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -8,12 +9,14 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-@Entity//mapear para o JPA
-@Table(name = "tb_order")//especifirar o nome da tabela
+//mapear para o JPA
+@Entity
+@Table(name = "tb_order")//especificar o nome da tabela
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id//informar a chave primaria do banco de dados
+    //informar a chave primaria do banco de dados
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//anotação de auto-increment
     private Long id;
 
@@ -21,7 +24,11 @@ public class Order implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
-    @ManyToOne//muitos para um
+    //enum
+    private Integer orderStatus;
+
+    //muitos para um
+    @ManyToOne
     @JoinColumn(name = "client_id")//indicar a chave estrangeira da entidade User
     private User client;//associação
 
@@ -30,10 +37,11 @@ public class Order implements Serializable {
     }
 
     //construtor com todos os atributos
-    public Order(Long id, Instant moment, User user) {
+    public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
         this.moment = moment;
-        this.client = user;
+        setOrderStatus(orderStatus);
+        this.client = client;
     }
 
     public Long getId() {
@@ -52,12 +60,22 @@ public class Order implements Serializable {
         this.moment = moment;
     }
 
-    public User getUser() {
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus != null) {
+            this.orderStatus = orderStatus.getCode();
+        }
+    }
+
+    public User getClient() {
         return client;
     }
 
-    public void setUser(User user) {
-        this.client = user;
+    public void setClient(User client) {
+        this.client = client;
     }
 
     @Override
