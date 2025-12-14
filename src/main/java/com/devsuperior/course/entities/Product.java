@@ -12,7 +12,6 @@ import java.util.Set;
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -22,9 +21,10 @@ public class Product implements Serializable {
     private double price;
     private String imgUrl;
 
-    //@ManyToOne
-    //@JoinColumn(name = "categories_id")
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name= "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id"))//indicar a chave estrangeira da entidade Product
     private Set<Category> categories = new HashSet<>();
 
     //construtor vazio
