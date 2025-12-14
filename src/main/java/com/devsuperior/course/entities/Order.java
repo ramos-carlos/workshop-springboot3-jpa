@@ -7,7 +7,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 //mapear para o JPA
 @Entity
@@ -31,6 +33,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")//indicar a chave estrangeira da entidade User
     private User client;//associação
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     //construtor vazio
     public Order () {
@@ -76,6 +81,10 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Set<OrderItem> getItem() {
+        return items;
     }
 
     @Override
