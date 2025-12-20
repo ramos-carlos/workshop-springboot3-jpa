@@ -27,9 +27,14 @@ public class UserService {
         return obj.get();//get() vai retornar o objeto do tipo User
     }
 
-    //inser dado no banco de dados
+    //inserir usuario
     public User insert(User obj) {
         return repository.save(obj);
+    }
+
+    //deletar usuario
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }
 
